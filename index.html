@@ -44,6 +44,12 @@
     .nav-link:hover, .nav-link.active { color: var(--ink); background: var(--accent-soft); }
     .nav-link.active { font-weight: 600; }
 
+    /* Version switcher in nav */
+    .nav-versions { display: flex; gap: 4px; margin-left: auto; }
+    .nav-ver { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--rule); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none; white-space: nowrap; }
+    .nav-ver:hover { border-color: var(--accent); color: var(--ink); }
+    .nav-ver.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
     /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 24px 60px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(124,107,255,0.15) 0%, transparent 70%); }
@@ -142,6 +148,9 @@
     @keyframes demo-scan { 0%{transform:translateY(0);} 50%{transform:translateY(50px);} 100%{transform:translateY(0);} }
     @keyframes demo-shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-3px);} 75%{transform:translateX(3px);} }
     @keyframes demo-breathe { 0%,100%{r:12;} 50%{r:18;} }
+    @keyframes demo-curtain-left { 0%{width:120px;} 100%{width:50px;} }
+    @keyframes demo-curtain-right { 0%{width:50px;} 100%{width:120px;} }
+    @keyframes demo-sensor-open { 0%{width:40px;} 100%{width:80px;} }
 
     /* Scene animation section */
     .scene-section { padding: 80px 0; }
@@ -203,11 +212,16 @@
     <div class="nav-inner">
       <div class="nav-logo">Smart Home</div>
       <div class="nav-links">
-        <button class="nav-link active" onclick="navTo('hero')">首页</button>
-        <button class="nav-link" onclick="navTo('floorplan')">户型总览</button>
-        <button class="nav-link" onclick="navTo('rooms')">设备详情</button>
-        <button class="nav-link" onclick="navTo('scenes')">联动场景</button>
-        <button class="nav-link" onclick="navTo('summary')">总结</button>
+        <button class="nav-link active" data-nav="hero" onclick="navTo('hero')">首页</button>
+        <button class="nav-link" data-nav="floorplan" onclick="navTo('floorplan')">户型总览</button>
+        <button class="nav-link" data-nav="rooms" onclick="navTo('rooms')">设备详情</button>
+        <button class="nav-link" data-nav="scenes" onclick="navTo('scenes')">联动场景</button>
+        <button class="nav-link" data-nav="summary" onclick="navTo('summary')">总结</button>
+      </div>
+      <div class="nav-versions">
+        <a class="nav-ver" href="smart-home-devices/smart-home-devices.html">V1 图鉴</a>
+        <a class="nav-ver" href="smart-home-demo/smart-home-demo.html">V2 控制台</a>
+        <a class="nav-ver active" href="./">V3 全景</a>
       </div>
     </div>
   </nav>

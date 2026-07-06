@@ -157,12 +157,12 @@
   // --- Light: brightness slider ---
   function demoLight() {
     var s = 'var(--accent)';
-    return '<svg viewBox="0 0 280 90" width="280" height="90"><circle cx="60" cy="45" r="18" fill="none" stroke="' + s + '" stroke-width="1.5" opacity="0.3"/><circle cx="60" cy="45" r="8" fill="' + s + '" opacity="0.8" style="animation:demo-pulse 2s ease-in-out infinite"/><line x1="90" y1="45" x2="240" y2="45" stroke="var(--rule)" stroke-width="6" rx="3" stroke-linecap="round"/><line x1="90" y1="45" x2="200" y2="45" stroke="' + s + '" stroke-width="6" stroke-linecap="round" style="animation:demo-dash 2s ease-in-out infinite alternate;stroke-dasharray:150;stroke-dashoffset:0"/><text x="250" y="50" fill="var(--muted)" font-size="10">78%</text></svg>';
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><circle cx="60" cy="45" r="18" fill="none" stroke="' + s + '" stroke-width="1.5" opacity="0.3"/><circle cx="60" cy="45" r="8" fill="' + s + '" opacity="0.8" style="animation:demo-pulse 2s ease-in-out infinite"/><line x1="90" y1="45" x2="240" y2="45" stroke="var(--rule)" stroke-width="6" rx="3" stroke-linecap="round"/><line x1="90" y1="45" x2="200" y2="45" stroke="' + s + '" stroke-width="6" stroke-linecap="round" style="animation:demo-dash 2s ease-in-out infinite alternate;stroke-dasharray:150;stroke-dashoffset:150"/><text x="250" y="50" fill="var(--muted)" font-size="10">78%</text></svg>';
   }
 
   // --- RGB strip: color cycling ---
   function demoRGB() {
-    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="20" y="30" width="240" height="20" rx="10" fill="url(#rgb-grad)"/><defs><linearGradient id="rgb-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff4d4d"/><stop offset="25%" stop-color="#ffb020"/><stop offset="50%" stop-color="#7cff6b"/><stop offset="75%" stop-color="#6bb5ff"/><stop offset="100%" stop-color="#c86bff"/></linearGradient></defs><circle cx="140" cy="65" r="6" fill="var(--accent)" style="animation:demo-pulse 1.5s ease-in-out infinite"/><text x="140" y="80" text-anchor="middle" fill="var(--muted)" font-size="9">1600万色</text></svg>';
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><defs><linearGradient id="rgb-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff4d4d"/><stop offset="25%" stop-color="#ffb020"/><stop offset="50%" stop-color="#7cff6b"/><stop offset="75%" stop-color="#6bb5ff"/><stop offset="100%" stop-color="#c86bff"/></linearGradient></defs><rect x="20" y="30" width="240" height="20" rx="10" fill="url(#rgb-grad)"/><circle cx="140" cy="65" r="6" fill="var(--accent)" style="animation:demo-pulse 1.5s ease-in-out infinite"/><text x="140" y="80" text-anchor="middle" fill="var(--muted)" font-size="9">1600万色</text></svg>';
   }
 
   // --- AC: temperature gauge ---
@@ -172,7 +172,7 @@
 
   // --- Curtain: panels slide ---
   function demoCurtain() {
-    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="20" y="5" width="120" height="70" fill="var(--bg3)" rx="4" stroke="var(--rule)" stroke-width="1"/><rect x="20" y="5" width="50" height="70" rx="4" fill="var(--accent-soft)" style="transition:width 2s;animation:curtain-left 2s ease-in-out infinite alternate"/><rect x="140" y="5" width="120" height="70" fill="var(--bg3)" rx="4" stroke="var(--rule)" stroke-width="1"/><rect x="210" y="5" width="50" height="70" rx="4" fill="var(--accent-soft)" style="animation:curtain-right 2s ease-in-out infinite alternate"/><style>@keyframes curtain-left{0%{width:120px;}100%{width:50px;}}@keyframes curtain-right{0%{width:50px;}100%{width:120px;}}</style><text x="140" y="88" text-anchor="middle" fill="var(--muted)" font-size="10">自动开合</text></svg>';
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="20" y="5" width="120" height="70" fill="var(--bg3)" rx="4" stroke="var(--rule)" stroke-width="1"/><rect x="20" y="5" width="50" height="70" rx="4" fill="var(--accent-soft)" style="animation:demo-curtain-left 2s ease-in-out infinite alternate"/><rect x="140" y="5" width="120" height="70" fill="var(--bg3)" rx="4" stroke="var(--rule)" stroke-width="1"/><rect x="210" y="5" width="50" height="70" rx="4" fill="var(--accent-soft)" style="animation:demo-curtain-right 2s ease-in-out infinite alternate"/><text x="140" y="88" text-anchor="middle" fill="var(--muted)" font-size="10">自动开合</text></svg>';
   }
 
   // --- Robot: scanning path ---
@@ -212,7 +212,7 @@
 
   // --- Sleep monitor: heart rate wave ---
   function demoSleep() {
-    return '<svg viewBox="0 0 280 90" width="280" height="90"><path d="M0,45 L60,45 L75,45 L82,25 L89,65 L96,45 L110,45 L140,45" fill="none" stroke="var(--accent3)" stroke-width="2" stroke-linecap="round" style="animation:demo-dash 2s linear infinite;stroke-dasharray:200;stroke-dashoffset:0"/><text x="190" y="42" fill="var(--ink)" font-size="12">💓 72 bpm</text><text x="190" y="58" fill="var(--muted)" font-size="10">心率监测 · 睡眠报告</text></svg>';
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><path d="M0,45 L60,45 L75,45 L82,25 L89,65 L96,45 L110,45 L140,45" fill="none" stroke="var(--accent3)" stroke-width="2" stroke-linecap="round" style="animation:demo-dash 2s linear infinite;stroke-dasharray:200;stroke-dashoffset:200"/><text x="190" y="42" fill="var(--ink)" font-size="12">💓 72 bpm</text><text x="190" y="58" fill="var(--muted)" font-size="10">心率监测 · 睡眠报告</text></svg>';
   }
 
   // --- Fridge: temp display ---
@@ -267,7 +267,7 @@
 
   // --- Door sensor: open/close ---
   function demoDoorSensor() {
-    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="15" width="80" height="50" rx="4" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="40" y="15" width="40" height="50" rx="4" fill="var(--accent-soft)" style="animation:demo-sensor-open 2s ease-in-out infinite alternate"/><style>@keyframes demo-sensor-open{0%{width:40px;}100%{width:80px;}}</style><text x="80" y="55" text-anchor="middle" fill="var(--accent3)" font-size="9" style="animation:demo-blink 2s ease-in-out infinite">⚠ 门窗打开</text><text x="150" y="35" fill="var(--ink)" font-size="11">🚪 开合检测</text><text x="150" y="53" fill="var(--accent2)" font-size="10">离家自动布防</text><text x="150" y="71" fill="var(--muted)" font-size="10">📱 异常立即报警</text></svg>';
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="15" width="80" height="50" rx="4" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="40" y="15" width="40" height="50" rx="4" fill="var(--accent-soft)" style="animation:demo-sensor-open 2s ease-in-out infinite alternate"/><text x="80" y="55" text-anchor="middle" fill="var(--accent3)" font-size="9" style="animation:demo-blink 2s ease-in-out infinite">⚠ 门窗打开</text><text x="150" y="35" fill="var(--ink)" font-size="11">🚪 开合检测</text><text x="150" y="53" fill="var(--accent2)" font-size="10">离家自动布防</text><text x="150" y="71" fill="var(--muted)" font-size="10">📱 异常立即报警</text></svg>';
   }
 
   // --- Water sensor: leak alert ---
@@ -277,10 +277,14 @@
 
   // ========== Scene Animation ==========
   window.playScene = function(sceneId) {
-    document.querySelectorAll('.scene-step').forEach(function(s) { s.classList.remove('active'); });
-    document.querySelector('.scene-step[data-scene="' + sceneId + '"]').classList.add('active');
-
     var scene = sceneData[sceneId];
+    if (!scene) return;
+    var step = document.querySelector('.scene-step[data-scene="' + sceneId + '"]');
+    if (!step) return;
+
+    document.querySelectorAll('.scene-step').forEach(function(s) { s.classList.remove('active'); });
+    step.classList.add('active');
+
     var content = document.getElementById('scene-content');
     content.style.animation = 'none';
     content.offsetHeight; // reflow
@@ -301,7 +305,7 @@
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     // Update nav
     document.querySelectorAll('.nav-link').forEach(function(l) { l.classList.remove('active'); });
-    var link = document.querySelector('.nav-link[onclick="navTo(\'' + id + '\')"]');
+    var link = document.querySelector('.nav-link[data-nav="' + id + '"]');
     if (link) link.classList.add('active');
   };
 
@@ -379,15 +383,21 @@
   function initNavScroll() {
     var sections = ['hero','floorplan','rooms','scenes','summary'];
     var links = document.querySelectorAll('.nav-link');
+    var ticking = false;
     window.addEventListener('scroll', function() {
-      var scrollY = window.scrollY + 100;
-      var active = 0;
-      sections.forEach(function(id, i) {
-        var el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) active = i;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        var scrollY = window.scrollY + 100;
+        var active = 0;
+        sections.forEach(function(id, i) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollY) active = i;
+        });
+        links.forEach(function(l) { l.classList.remove('active'); });
+        if (links[active]) links[active].classList.add('active');
+        ticking = false;
       });
-      links.forEach(function(l) { l.classList.remove('active'); });
-      if (links[active]) links[active].classList.add('active');
     });
   }
 
