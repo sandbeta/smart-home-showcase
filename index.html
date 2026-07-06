@@ -44,6 +44,12 @@
     .nav-link:hover, .nav-link.active { color: var(--ink); background: var(--accent-soft); }
     .nav-link.active { font-weight: 600; }
 
+    /* Version switcher in nav */
+    .nav-versions { display: flex; gap: 4px; margin-left: auto; }
+    .nav-ver { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--rule); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none; white-space: nowrap; }
+    .nav-ver:hover { border-color: var(--accent); color: var(--ink); }
+    .nav-ver.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
     /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 24px 60px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(124,107,255,0.15) 0%, transparent 70%); }
@@ -189,6 +195,11 @@
         <button class="nav-link" onclick="navTo('rooms')">设备详情</button>
         <button class="nav-link" onclick="navTo('scenes')">联动场景</button>
         <button class="nav-link" onclick="navTo('summary')">总结</button>
+      </div>
+      <div class="nav-versions">
+        <a class="nav-ver" href="smart-home-devices/smart-home-devices.html">V1 图鉴</a>
+        <a class="nav-ver" href="smart-home-demo/smart-home-demo.html">V2 控制台</a>
+        <a class="nav-ver active" href="./">V3 全景</a>
       </div>
     </div>
   </nav>

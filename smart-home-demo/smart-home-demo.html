@@ -43,6 +43,16 @@
       padding: 32px 20px 48px;
     }
 
+    /* Top nav bar */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15,15,18,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 0 20px; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; height: 48px; gap: 16px; }
+    .nav-logo { font-size: 14px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+    .nav-versions { display: flex; gap: 4px; margin-left: auto; }
+    .nav-ver { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--rule); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none; white-space: nowrap; }
+    .nav-ver:hover { border-color: var(--accent); color: var(--ink); }
+    .nav-ver.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .nav-spacer { height: 48px; }
+
     /* Header */
     .header {
       display: flex;
@@ -594,6 +604,19 @@
   </style>
 </head>
 <body>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">Smart Home</div>
+      <div class="nav-versions">
+        <a class="nav-ver" href="../smart-home-devices/smart-home-devices.html">V1 图鉴</a>
+        <a class="nav-ver active" href="./">V2 控制台</a>
+        <a class="nav-ver" href="../">V3 全景</a>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-spacer"></div>
+
   <div class="container">
     <!-- Header -->
     <div class="header">
