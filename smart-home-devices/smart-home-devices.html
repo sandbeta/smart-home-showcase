@@ -7,21 +7,22 @@
   <title>我们家的智能家居设备</title>
   <style>
     :root {
-      --bg: #FAFAF9;
-      --bg2: #F1F0EE;
-      --ink: #1C1917;
-      --muted: #78716C;
-      --rule: #E7E5E4;
-      --accent: #6D5CE7;
-      --accent2: #0EA5A0;
-      --accent-soft: #EDE9FE;
-      --accent2-soft: #ECFDF5;
-      --warm: #F59E0B;
-      --warm-soft: #FEF3C7;
+      --bg: #0F0F12;
+      --bg2: #1A1A1F;
+      --bg3: #24242B;
+      --ink: #F0F0F5;
+      --muted: #8A8A99;
+      --rule: rgba(255,255,255,0.08);
+      --accent: #7C6BFF;
+      --accent2: #00D4AA;
+      --accent-soft: rgba(124,107,255,0.15);
+      --accent2-soft: rgba(0,212,170,0.12);
+      --warm: #FFB020;
+      --warm-soft: rgba(255,176,32,0.15);
       --radius: 16px;
       --radius-sm: 10px;
-      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(0,0,0,0.06);
-      --shadow-lg: 0 4px 6px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
       --font: "PingFang SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", system-ui, -apple-system, sans-serif;
     }
 
@@ -43,7 +44,7 @@
     }
 
     /* Top nav bar */
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,249,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 0 20px; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15,15,18,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 0 20px; }
     .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; height: 48px; gap: 16px; }
     .nav-logo { font-size: 14px; font-weight: 700; color: var(--accent); white-space: nowrap; }
     .nav-versions { display: flex; gap: 4px; margin-left: auto; }
@@ -162,7 +163,7 @@
     }
 
     .device-card {
-      background: #fff;
+      background: var(--bg2);
       border: 1px solid var(--rule);
       border-radius: var(--radius-sm);
       padding: 20px 18px;
