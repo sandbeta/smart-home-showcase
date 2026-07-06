@@ -44,12 +44,6 @@
     .nav-link:hover, .nav-link.active { color: var(--ink); background: var(--accent-soft); }
     .nav-link.active { font-weight: 600; }
 
-    /* Version switcher in nav */
-    .nav-versions { display: flex; gap: 4px; margin-left: auto; }
-    .nav-ver { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--rule); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none; white-space: nowrap; }
-    .nav-ver:hover { border-color: var(--accent); color: var(--ink); }
-    .nav-ver.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
     /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 24px 60px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(124,107,255,0.15) 0%, transparent 70%); }
@@ -120,7 +114,7 @@
 
     /* Expand panel */
     .expand-panel { background: var(--bg2); border: 1px solid var(--rule); border-radius: var(--radius); padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.5s; margin-bottom: 24px; }
-    .expand-panel.open { max-height: 400px; padding: 28px; border-color: rgba(124,107,255,0.3); }
+    .expand-panel.open { max-height: 700px; padding: 28px; border-color: rgba(124,107,255,0.3); }
     .expand-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
     .expand-icon { font-size: 32px; }
     .expand-title { font-size: 20px; font-weight: 600; }
@@ -129,6 +123,25 @@
     .expand-item { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px; }
     .expand-item-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--accent2); }
     .expand-item-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* Device demo area */
+    .demo-area { background: var(--bg3); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px; min-height: 100px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .demo-area svg { max-width: 100%; }
+    .demo-fallback { text-align: center; color: var(--muted); font-size: 13px; }
+    .demo-label { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; position: absolute; top: 10px; left: 14px; font-weight: 600; }
+
+    /* Demo animations */
+    @keyframes demo-pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+    @keyframes demo-slide { from{transform:translateX(-100%);} to{transform:translateX(100%);} }
+    @keyframes demo-rise { from{transform:translateY(0);opacity:1;} to{transform:translateY(-40px);opacity:0;} }
+    @keyframes demo-wave { 0%,100%{transform:scaleY(0.3);} 50%{transform:scaleY(1);} }
+    @keyframes demo-spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+    @keyframes demo-blink { 0%,100%{opacity:1;} 40%{opacity:0.1;} 60%{opacity:0.1;} }
+    @keyframes demo-fill { from{height:0;} }
+    @keyframes demo-dash { to{stroke-dashoffset:0;} }
+    @keyframes demo-scan { 0%{transform:translateY(0);} 50%{transform:translateY(50px);} 100%{transform:translateY(0);} }
+    @keyframes demo-shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-3px);} 75%{transform:translateX(3px);} }
+    @keyframes demo-breathe { 0%,100%{r:12;} 50%{r:18;} }
 
     /* Scene animation section */
     .scene-section { padding: 80px 0; }
@@ -195,11 +208,6 @@
         <button class="nav-link" onclick="navTo('rooms')">设备详情</button>
         <button class="nav-link" onclick="navTo('scenes')">联动场景</button>
         <button class="nav-link" onclick="navTo('summary')">总结</button>
-      </div>
-      <div class="nav-versions">
-        <a class="nav-ver" href="smart-home-devices/smart-home-devices.html">V1 图鉴</a>
-        <a class="nav-ver" href="smart-home-demo/smart-home-demo.html">V2 控制台</a>
-        <a class="nav-ver active" href="./">V3 全景</a>
       </div>
     </div>
   </nav>
@@ -290,6 +298,7 @@
           <span class="expand-icon" id="expand-icon-living"></span>
           <div><div class="expand-title" id="expand-title-living"></div><div class="expand-subtitle">核心功能详解</div></div>
         </div>
+        <div class="demo-area" id="demo-living"></div>
         <div class="expand-grid" id="expand-grid-living"></div>
       </div>
     </div>
@@ -302,6 +311,7 @@
           <span class="expand-icon" id="expand-icon-bedroom"></span>
           <div><div class="expand-title" id="expand-title-bedroom"></div><div class="expand-subtitle">核心功能详解</div></div>
         </div>
+        <div class="demo-area" id="demo-bedroom"></div>
         <div class="expand-grid" id="expand-grid-bedroom"></div>
       </div>
     </div>
@@ -314,6 +324,7 @@
           <span class="expand-icon" id="expand-icon-kitchen"></span>
           <div><div class="expand-title" id="expand-title-kitchen"></div><div class="expand-subtitle">核心功能详解</div></div>
         </div>
+        <div class="demo-area" id="demo-kitchen"></div>
         <div class="expand-grid" id="expand-grid-kitchen"></div>
       </div>
     </div>
@@ -326,6 +337,7 @@
           <span class="expand-icon" id="expand-icon-security"></span>
           <div><div class="expand-title" id="expand-title-security"></div><div class="expand-subtitle">核心功能详解</div></div>
         </div>
+        <div class="demo-area" id="demo-security"></div>
         <div class="expand-grid" id="expand-grid-security"></div>
       </div>
     </div>

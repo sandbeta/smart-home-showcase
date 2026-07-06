@@ -97,6 +97,10 @@
 
     document.getElementById('expand-icon-' + roomId).textContent = dev.icon;
     document.getElementById('expand-title-' + roomId).textContent = dev.name;
+
+    // Render device demo
+    renderDemo(roomId, dev.name);
+
     var grid = document.getElementById('expand-grid-' + roomId);
     grid.innerHTML = dev.details.map(function(d) {
       return '<div class="expand-item"><div class="expand-item-title">' + d.t + '</div><div class="expand-item-desc">' + d.d + '</div></div>';
@@ -104,6 +108,171 @@
 
     panel.classList.add('open');
     currentExpand[roomId] = idx;
+  }
+
+  // ========== Device Demo Renderers ==========
+  var demoMap = {
+    '智能电视':   demoTV,
+    '智能主灯':   demoLight,
+    '氛围灯带':   demoRGB,
+    '客厅空调':   demoAC,
+    '电动窗帘':   demoCurtain,
+    '扫地机器人': demoRobot,
+    '智能音箱':   demoSpeaker,
+    '智能床头灯': demoNightLight,
+    '卧室空调':   demoSleepAC,
+    '遮光窗帘':   demoBlackout,
+    '卧室加湿器': demoHumidifier,
+    '卧室电视':   demoBedTV,
+    '睡眠监测仪': demoSleep,
+    '智能冰箱':   demoFridge,
+    '智能烤箱':   demoOven,
+    '智能洗碗机': demoDishwasher,
+    '燃气报警器': demoGasAlarm,
+    '智能热水器': demoWaterHeater,
+    '智能魔镜':   demoMirror,
+    '净水器':     demoFilter,
+    '智能门锁':   demoLock,
+    '门口摄像头': demoDoorCam,
+    '室内摄像头': demoIndoorCam,
+    '门窗传感器': demoDoorSensor,
+    '水浸传感器': demoWaterSensor
+  };
+
+  function renderDemo(roomId, name) {
+    var el = document.getElementById('demo-' + roomId);
+    var fn = demoMap[name];
+    if (fn) {
+      el.innerHTML = '<div class="demo-label">演示</div>' + fn();
+    } else {
+      el.innerHTML = '<div class="demo-fallback">点击下方功能项查看详情</div>';
+    }
+  }
+
+  // --- TV: screen turns on ---
+  function demoTV() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="4" width="200" height="68" rx="6" fill="#1a1a24" stroke="var(--rule)" stroke-width="1.5"/><rect x="44" y="8" width="192" height="60" rx="3" fill="#0a0a14"/><rect x="44" y="8" width="192" height="60" rx="3" fill="var(--accent)" opacity="0" style="animation:demo-pulse 2s ease-in-out infinite"/><text x="140" y="44" text-anchor="middle" fill="var(--accent2)" font-size="11" opacity="0.8" style="animation:demo-pulse 2s ease-in-out infinite">▶ 正在播放</text><rect x="128" y="76" width="24" height="10" rx="3" fill="var(--rule)"/></svg>';
+  }
+
+  // --- Light: brightness slider ---
+  function demoLight() {
+    var s = 'var(--accent)';
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><circle cx="60" cy="45" r="18" fill="none" stroke="' + s + '" stroke-width="1.5" opacity="0.3"/><circle cx="60" cy="45" r="8" fill="' + s + '" opacity="0.8" style="animation:demo-pulse 2s ease-in-out infinite"/><line x1="90" y1="45" x2="240" y2="45" stroke="var(--rule)" stroke-width="6" rx="3" stroke-linecap="round"/><line x1="90" y1="45" x2="200" y2="45" stroke="' + s + '" stroke-width="6" stroke-linecap="round" style="animation:demo-dash 2s ease-in-out infinite alternate;stroke-dasharray:150;stroke-dashoffset:0"/><text x="250" y="50" fill="var(--muted)" font-size="10">78%</text></svg>';
+  }
+
+  // --- RGB strip: color cycling ---
+  function demoRGB() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="20" y="30" width="240" height="20" rx="10" fill="url(#rgb-grad)"/><defs><linearGradient id="rgb-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff4d4d"/><stop offset="25%" stop-color="#ffb020"/><stop offset="50%" stop-color="#7cff6b"/><stop offset="75%" stop-color="#6bb5ff"/><stop offset="100%" stop-color="#c86bff"/></linearGradient></defs><circle cx="140" cy="65" r="6" fill="var(--accent)" style="animation:demo-pulse 1.5s ease-in-out infinite"/><text x="140" y="80" text-anchor="middle" fill="var(--muted)" font-size="9">1600万色</text></svg>';
+  }
+
+  // --- AC: temperature gauge ---
+  function demoAC() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><text x="30" y="45" fill="var(--ink)" font-size="28" font-weight="700">26°</text><text x="82" y="42" fill="var(--muted)" font-size="10">℃</text><line x1="100" y1="45" x2="240" y2="45" stroke="var(--rule)" stroke-width="4" rx="2" stroke-linecap="round"/><circle cx="180" cy="45" r="10" fill="var(--accent)" style="animation:demo-pulse 2s ease-in-out infinite"/><text x="260" y="50" fill="var(--accent2)" font-size="10">❄</text><text x="30" y="78" fill="var(--muted)" font-size="10">室外 35° → 室内 26°</text></svg>';
+  }
+
+  // --- Curtain: panels slide ---
+  function demoCurtain() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="20" y="5" width="120" height="70" fill="var(--bg3)" rx="4" stroke="var(--rule)" stroke-width="1"/><rect x="20" y="5" width="50" height="70" rx="4" fill="var(--accent-soft)" style="transition:width 2s;animation:curtain-left 2s ease-in-out infinite alternate"/><rect x="140" y="5" width="120" height="70" fill="var(--bg3)" rx="4" stroke="var(--rule)" stroke-width="1"/><rect x="210" y="5" width="50" height="70" rx="4" fill="var(--accent-soft)" style="animation:curtain-right 2s ease-in-out infinite alternate"/><style>@keyframes curtain-left{0%{width:120px;}100%{width:50px;}}@keyframes curtain-right{0%{width:50px;}100%{width:120px;}}</style><text x="140" y="88" text-anchor="middle" fill="var(--muted)" font-size="10">自动开合</text></svg>';
+  }
+
+  // --- Robot: scanning path ---
+  function demoRobot() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="20" y="15" width="240" height="55" rx="6" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="4"/><circle r="6" fill="var(--accent)" style="animation:demo-robot-path 3s linear infinite"><animateMotion dur="3s" repeatCount="indefinite" path="M30,30 L250,30 L250,68 L30,68 Z"/></circle><text x="140" y="85" text-anchor="middle" fill="var(--muted)" font-size="10">激光导航 · 规划清扫</text></svg>';
+  }
+
+  // --- Speaker: sound waves ---
+  function demoSpeaker() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="20" width="8" height="50" rx="4" fill="var(--accent)"/><rect x="55" y="28" width="6" height="34" rx="3" fill="var(--accent)" style="animation:demo-wave 1s ease-in-out infinite;transform-origin:center" opacity="0.8"/><rect x="68" y="22" width="6" height="46" rx="3" fill="var(--accent)" style="animation:demo-wave 1s ease-in-out 0.15s infinite;transform-origin:center" opacity="0.8"/><rect x="81" y="16" width="6" height="58" rx="3" fill="var(--accent)" style="animation:demo-wave 1s ease-in-out 0.3s infinite;transform-origin:center" opacity="0.8"/><rect x="94" y="24" width="6" height="42" rx="3" fill="var(--accent2)" style="animation:demo-wave 0.8s ease-in-out 0.1s infinite;transform-origin:center" opacity="0.8"/><rect x="107" y="18" width="6" height="54" rx="3" fill="var(--accent2)" style="animation:demo-wave 0.8s ease-in-out 0.25s infinite;transform-origin:center" opacity="0.8"/><text x="200" y="50" fill="var(--muted)" font-size="10">全屋语音控制</text></svg>';
+  }
+
+  // --- Night light: gradual bright ---
+  function demoNightLight() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><circle cx="80" cy="45" r="20" fill="var(--accent)" opacity="0.2" style="animation:demo-pulse 3s ease-in-out infinite"/><circle cx="80" cy="45" r="12" fill="var(--accent)" opacity="0.5" style="animation:demo-pulse 3s ease-in-out infinite"/><circle cx="80" cy="45" r="6" fill="var(--accent)" opacity="0.9" style="animation:demo-pulse 3s ease-in-out infinite"/><text x="130" y="42" fill="var(--ink)" font-size="12">🌅 渐亮唤醒</text><text x="130" y="58" fill="var(--muted)" font-size="10">模拟日出 15 分钟</text></svg>';
+  }
+
+  // --- Sleep AC: temp curve ---
+  function demoSleepAC() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><polyline points="20,65 80,50 140,45 200,42 260,40" fill="none" stroke="var(--accent2)" stroke-width="2"/><circle cx="20" cy="65" r="3" fill="var(--accent2)"/><circle cx="80" cy="50" r="3" fill="var(--accent2)"/><circle cx="140" cy="45" r="3" fill="var(--accent2)"/><circle cx="200" cy="42" r="3" fill="var(--accent2)"/><circle cx="260" cy="40" r="3" fill="var(--accent2)"/><text x="280" y="44" fill="var(--accent2)" font-size="9">26°</text><text x="20" y="82" fill="var(--muted)" font-size="9">22:00</text><text x="248" y="82" fill="var(--muted)" font-size="9">06:00</text></svg>';
+  }
+
+  // --- Blackout curtain: full dark ---
+  function demoBlackout() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="50" y="10" width="180" height="60" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/><rect x="50" y="10" width="180" height="60" rx="6" fill="#000" style="animation:demo-pulse 3s ease-in-out infinite"/><text x="140" y="45" text-anchor="middle" fill="var(--muted)" font-size="10" opacity="0.5">100% 遮光</text><text x="140" y="85" text-anchor="middle" fill="var(--muted)" font-size="10">配合起床时间自动拉开</text></svg>';
+  }
+
+  // --- Humidifier: mist rising ---
+  function demoHumidifier() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="110" y="50" width="40" height="20" rx="4" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><circle cx="120" cy="40" r="5" fill="var(--accent)" opacity="0.4" style="animation:demo-rise 2s ease-out infinite"/><circle cx="135" cy="32" r="6" fill="var(--accent)" opacity="0.35" style="animation:demo-rise 2s ease-out 0.4s infinite"/><circle cx="148" cy="38" r="5" fill="var(--accent)" opacity="0.3" style="animation:demo-rise 2s ease-out 0.8s infinite"/><circle cx="130" cy="28" r="4" fill="var(--accent)" opacity="0.3" style="animation:demo-rise 1.8s ease-out 1.2s infinite"/><text x="180" y="65" fill="var(--accent2)" font-size="11">55%</text><text x="180" y="80" fill="var(--muted)" font-size="10">目标恒湿</text></svg>';
+  }
+
+  // --- Bedroom TV: sleep timer ---
+  function demoBedTV() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="4" width="200" height="68" rx="6" fill="#1a1a24" stroke="var(--rule)" stroke-width="1.5"/><rect x="44" y="8" width="192" height="60" rx="3" fill="#0a0a14"/><rect x="44" y="8" width="192" height="60" rx="3" fill="var(--accent)" opacity="0.15" style="animation:demo-blink 3s ease-in-out infinite"/><text x="140" y="44" text-anchor="middle" fill="var(--accent3)" font-size="11" style="animation:demo-blink 3s ease-in-out infinite">⏰ 30分钟后自动关机</text><rect x="128" y="76" width="24" height="10" rx="3" fill="var(--rule)"/></svg>';
+  }
+
+  // --- Sleep monitor: heart rate wave ---
+  function demoSleep() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><path d="M0,45 L60,45 L75,45 L82,25 L89,65 L96,45 L110,45 L140,45" fill="none" stroke="var(--accent3)" stroke-width="2" stroke-linecap="round" style="animation:demo-dash 2s linear infinite;stroke-dasharray:200;stroke-dashoffset:0"/><text x="190" y="42" fill="var(--ink)" font-size="12">💓 72 bpm</text><text x="190" y="58" fill="var(--muted)" font-size="10">心率监测 · 睡眠报告</text></svg>';
+  }
+
+  // --- Fridge: temp display ---
+  function demoFridge() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="5" width="60" height="75" rx="6" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="44" y="10" width="52" height="30" rx="4" fill="#1a2a2a"/><text x="70" y="30" text-anchor="middle" fill="var(--accent2)" font-size="10">4°C</text><rect x="44" y="44" width="52" height="30" rx="4" fill="#1a2a2a"/><text x="70" y="64" text-anchor="middle" fill="var(--accent2)" font-size="10">-18°C</text><text x="130" y="30" fill="var(--ink)" font-size="11">🥛 牛奶 3天后到期</text><text x="130" y="48" fill="var(--accent4)" font-size="10">⚠ 鸡蛋 明天到期</text><text x="130" y="66" fill="var(--muted)" font-size="10">📱 远程查看库存</text></svg>';
+  }
+
+  // --- Oven: temperature rising ---
+  function demoOven() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="5" width="60" height="70" rx="6" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="46" y="12" width="48" height="56" rx="4" fill="#1a1212"/><rect x="46" y="12" width="48" height="56" rx="4" fill="var(--accent3)" opacity="0" style="animation:demo-pulse 2s ease-in-out infinite"/><text x="70" y="48" text-anchor="middle" fill="var(--accent4)" font-size="16" font-weight="700">180°</text><text x="130" y="30" fill="var(--ink)" font-size="11">🔥 预热中...</text><text x="130" y="48" fill="var(--accent2)" font-size="10">烘焙模式 · 40分钟</text><text x="130" y="66" fill="var(--muted)" font-size="10">📱 远程关机</text></svg>';
+  }
+
+  // --- Dishwasher: water spray ---
+  function demoDishwasher() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="5" width="60" height="70" rx="6" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="46" y="12" width="48" height="56" rx="4" fill="#1a1a24"/><rect x="46" y="12" width="48" height="56" rx="4" fill="var(--accent2)" opacity="0.08" style="animation:demo-pulse 1.5s ease-in-out infinite"/><text x="70" y="48" text-anchor="middle" fill="var(--accent2)" font-size="11">💧 清洗中</text><text x="130" y="30" fill="var(--ink)" font-size="11">🍽️ 节能模式</text><text x="130" y="48" fill="var(--accent2)" font-size="10">仅用 9L 水</text><text x="130" y="66" fill="var(--muted)" font-size="10">📱 完成通知</text></svg>';
+  }
+
+  // --- Gas alarm: alert ---
+  function demoGasAlarm() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><circle cx="70" cy="45" r="22" fill="none" stroke="var(--accent3)" stroke-width="2" style="animation:demo-blink 1s ease-in-out infinite"/><text x="70" y="50" text-anchor="middle" fill="var(--accent3)" font-size="16" style="animation:demo-blink 1s ease-in-out infinite">⚠</text><text x="120" y="30" fill="var(--accent3)" font-size="12" style="animation:demo-blink 1s ease-in-out infinite">燃气泄漏！</text><text x="120" y="50" fill="var(--muted)" font-size="10">自动关闭阀门</text><text x="120" y="66" fill="var(--muted)" font-size="10">📱 手机推送报警</text></svg>';
+  }
+
+  // --- Water heater: temperature ---
+  function demoWaterHeater() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="5" width="50" height="70" rx="25" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="30" y="25" width="70" height="40" rx="0" fill="var(--accent)" opacity="0.15" style="animation:demo-fill 2s ease-in-out infinite alternate;height:0;transform-origin:bottom"/><text x="65" y="50" text-anchor="middle" fill="var(--ink)" font-size="14" font-weight="700">42°</text><text x="120" y="30" fill="var(--ink)" font-size="11">🚿 预约加热</text><text x="120" y="48" fill="var(--accent2)" font-size="10">恒温出水</text><text x="120" y="66" fill="var(--muted)" font-size="10">📊 用水统计</text></svg>';
+  }
+
+  // --- Mirror: weather ---
+  function demoMirror() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="5" width="70" height="70" rx="35" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1.5"/><text x="75" y="48" text-anchor="middle" fill="var(--accent)" font-size="20">🪞</text><text x="140" y="28" fill="var(--ink)" font-size="11">🌤 晴 26° 上海</text><text x="140" y="46" fill="var(--muted)" font-size="10">📅 今天 3 个待办事项</text><text x="140" y="64" fill="var(--muted)" font-size="10">🎤 语音控制其他设备</text></svg>';
+  }
+
+  // --- Water filter: droplets ---
+  function demoFilter() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="5" width="50" height="70" rx="8" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><circle cx="55" cy="30" r="8" fill="var(--accent)" opacity="0.3" style="animation:demo-pulse 2s ease-in-out infinite"/><circle cx="55" cy="48" r="8" fill="var(--accent)" opacity="0.5" style="animation:demo-pulse 2s ease-in-out 0.5s infinite"/><circle cx="55" cy="66" r="8" fill="var(--accent)" opacity="0.7" style="animation:demo-pulse 2s ease-in-out 1s infinite"/><text x="120" y="28" fill="var(--accent2)" font-size="11">TDS 12</text><text x="120" y="46" fill="var(--muted)" font-size="10">RO反渗透过滤</text><text x="120" y="64" fill="var(--muted)" font-size="10">滤芯寿命 87%</text></svg>';
+  }
+
+  // --- Door lock: lock/unlock ---
+  function demoLock() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="60" y="5" width="40" height="50" rx="8" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1.5"/><circle cx="80" cy="32" r="8" fill="none" stroke="var(--accent2)" stroke-width="2" style="animation:demo-spin 3s ease-in-out infinite;transform-origin:80px 32px"/><text x="80" y="55" text-anchor="middle" fill="var(--accent2)" font-size="8">🔓</text><text x="130" y="28" fill="var(--ink)" font-size="11">指纹解锁 0.3秒</text><text x="130" y="46" fill="var(--muted)" font-size="10">🔑 密码 · NFC · 指纹</text><text x="130" y="64" fill="var(--muted)" font-size="10">📱 开锁实时推送</text></svg>';
+  }
+
+  // --- Door camera: detection ---
+  function demoDoorCam() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="30" y="5" width="70" height="55" rx="8" fill="#0a0a14" stroke="var(--rule)" stroke-width="1"/><rect x="36" y="12" width="58" height="42" rx="4" fill="#111"/><rect x="50" y="20" width="30" height="24" rx="2" fill="var(--accent)" opacity="0.15" style="animation:demo-blink 2s ease-in-out infinite"/><text x="65" y="42" text-anchor="middle" fill="var(--accent3)" font-size="7" style="animation:demo-blink 2s ease-in-out infinite">检测到人</text><text x="65" y="68" text-anchor="middle" fill="var(--muted)" font-size="8">📹 红外夜视</text><text x="140" y="28" fill="var(--ink)" font-size="11">📹 可视门铃</text><text x="140" y="46" fill="var(--accent2)" font-size="10">人形侦测 · 远程对讲</text><text x="140" y="64" fill="var(--muted)" font-size="10">📱 手机远程接听</text></svg>';
+  }
+
+  // --- Indoor camera: tracking ---
+  function demoIndoorCam() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="30" y="5" width="70" height="55" rx="8" fill="#0a0a14" stroke="var(--rule)" stroke-width="1"/><rect x="36" y="12" width="58" height="42" rx="4" fill="#111"/><circle cx="65" cy="28" r="4" fill="var(--accent2)" style="animation:demo-scan 2s ease-in-out infinite"/><text x="65" y="68" text-anchor="middle" fill="var(--muted)" font-size="8">🤖 移动追踪</text><text x="140" y="28" fill="var(--ink)" font-size="11">👀 看护模式</text><text x="140" y="46" fill="var(--accent3)" font-size="10">跌倒检测 · 宠物看护</text><text x="140" y="64" fill="var(--muted)" font-size="10">🔒 隐私模式一键关闭</text></svg>';
+  }
+
+  // --- Door sensor: open/close ---
+  function demoDoorSensor() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><rect x="40" y="15" width="80" height="50" rx="4" fill="var(--bg3)" stroke="var(--rule)" stroke-width="1"/><rect x="40" y="15" width="40" height="50" rx="4" fill="var(--accent-soft)" style="animation:demo-sensor-open 2s ease-in-out infinite alternate"/><style>@keyframes demo-sensor-open{0%{width:40px;}100%{width:80px;}}</style><text x="80" y="55" text-anchor="middle" fill="var(--accent3)" font-size="9" style="animation:demo-blink 2s ease-in-out infinite">⚠ 门窗打开</text><text x="150" y="35" fill="var(--ink)" font-size="11">🚪 开合检测</text><text x="150" y="53" fill="var(--accent2)" font-size="10">离家自动布防</text><text x="150" y="71" fill="var(--muted)" font-size="10">📱 异常立即报警</text></svg>';
+  }
+
+  // --- Water sensor: leak alert ---
+  function demoWaterSensor() {
+    return '<svg viewBox="0 0 280 90" width="280" height="90"><circle cx="60" cy="40" r="20" fill="none" stroke="var(--accent2)" stroke-width="1.5" opacity="0.3"/><circle cx="60" cy="40" r="8" fill="var(--accent2)" style="animation:demo-pulse 1.5s ease-in-out infinite"/><text x="60" y="68" text-anchor="middle" fill="var(--accent2)" font-size="9">💧 检测中</text><text x="140" y="25" fill="var(--ink)" font-size="11">💧 漏水检测</text><text x="140" y="43" fill="var(--accent3)" font-size="10">接触水即刻报警</text><text x="140" y="61" fill="var(--muted)" font-size="10">🔗 联动关闭水阀</text></svg>';
   }
 
   // ========== Scene Animation ==========
