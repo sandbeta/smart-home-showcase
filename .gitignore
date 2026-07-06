@@ -1,0 +1,12 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local share packages
+.trae-html-share-packages/
+
+# Temp work
+*.log
+*.tmp

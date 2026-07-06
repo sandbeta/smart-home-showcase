@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能家居设备结构图</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --surface: #F7F7F8;
+      --surface-muted: #EFEFF2;
+      --text: #171717;
+      --text-muted: #52525B;
+      --border: rgba(23, 23, 23, 0.12);
+      --brand: #4B3FE3;
+      --brand-soft: #F2F7FF;
+      --brand-soft-strong: #E5EAFF;
+      --brand-text: #1A1759;
+      --brand-on: #FFFFFF;
+      --font-sans: "SF Pro Text", "PingFang SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --surface: #171717;
+        --surface-muted: #262626;
+        --text: #E5E5E5;
+        --text-muted: #A1A1AA;
+        --border: rgba(229, 229, 229, 0.12);
+        --brand: #6054F1;
+        --brand-soft: #1A1759;
+        --brand-soft-strong: #3C2ECA;
+        --brand-text: #CFD8FF;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--surface);
+      font-family: var(--font-sans);
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .desc {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 22px;
+      margin-bottom: 12px;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .t { fill: var(--text); font-size: 14px; font-family: var(--font-sans); }
+    .th { fill: var(--text); font-size: 14px; font-family: var(--font-sans); font-weight: 500; }
+    .ts { fill: var(--text-muted); font-size: 12px; font-family: var(--font-sans); }
+    .arr { stroke: var(--text-muted); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .leader { stroke: var(--text-muted); stroke-width: 0.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4 4; fill: none; }
+
+    g.c-neutral > rect, rect.c-neutral { fill: var(--surface); stroke: var(--border); }
+    g.c-brand > rect, rect.c-brand { fill: var(--brand-soft); stroke: var(--brand); }
+    g.c-external > rect, rect.c-external { fill: var(--surface); stroke: color-mix(in srgb, var(--text-muted) 42%, var(--border)); }
+
+    .c-brand .th { fill: var(--brand-text); }
+    .c-brand .ts { fill: var(--brand); }
+    .c-external .th { fill: var(--text); }
+    .c-external .ts { fill: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>智能家居设备结构图</h1>
+    <svg viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M1 1 L7 4 L1 7 Z" fill="var(--text-muted)" />
+        </marker>
+        <marker id="arrowBrand" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M1 1 L7 4 L1 7 Z" fill="var(--brand)" />
+        </marker>
+      </defs>
+
+      <!-- Title -->
+      <text class="th" x="360" y="36" text-anchor="middle" font-size="16px" font-weight="600" fill="var(--text)">智能家居设备结构图</text>
+
+      <!-- Boundary -->
+      <rect x="40" y="110" width="640" height="370" rx="12" fill="transparent" stroke="var(--border)" stroke-dasharray="8 5" stroke-width="2" />
+      <rect x="50" y="98" width="80" height="24" rx="6" fill="var(--surface-muted)" stroke="var(--border)" stroke-width="1" />
+      <text class="ts" x="90" y="115" text-anchor="middle">智能家居系统</text>
+
+      <!-- External nodes -->
+      <g class="c-external">
+        <rect x="62" y="65" width="120" height="44" rx="8" />
+        <text class="th" x="122" y="92" text-anchor="middle">用户终端</text>
+      </g>
+      <g class="c-external">
+        <rect x="242" y="65" width="120" height="44" rx="8" />
+        <text class="th" x="302" y="92" text-anchor="middle">语音助手</text>
+      </g>
+      <g class="c-external">
+        <rect x="422" y="65" width="120" height="44" rx="8" />
+        <text class="th" x="482" y="92" text-anchor="middle">云平台</text>
+      </g>
+
+      <!-- Brand gateway -->
+      <g class="c-brand">
+        <rect x="265" y="155" width="190" height="54" rx="8" />
+        <text class="th" x="360" y="179" text-anchor="middle">智能网关 / 中枢</text>
+        <text class="ts" x="360" y="196" text-anchor="middle">连接 · 调度 · 联动</text>
+      </g>
+
+      <!-- Device modules -->
+      <g class="c-neutral">
+        <rect x="52" y="275" width="106" height="64" rx="8" />
+        <text class="th" x="105" y="303" text-anchor="middle">智能照明</text>
+        <text class="ts" x="105" y="322" text-anchor="middle">灯光控制</text>
+      </g>
+      <g class="c-neutral">
+        <rect x="182" y="275" width="106" height="64" rx="8" />
+        <text class="th" x="235" y="303" text-anchor="middle">环境控制</text>
+        <text class="ts" x="235" y="322" text-anchor="middle">温湿调节</text>
+      </g>
+      <g class="c-neutral">
+        <rect x="312" y="275" width="106" height="64" rx="8" />
+        <text class="th" x="365" y="303" text-anchor="middle">安防监控</text>
+        <text class="ts" x="365" y="322" text-anchor="middle">安防监控</text>
+      </g>
+      <g class="c-neutral">
+        <rect x="442" y="275" width="106" height="64" rx="8" />
+        <text class="th" x="495" y="303" text-anchor="middle">影音娱乐</text>
+        <text class="ts" x="495" y="322" text-anchor="middle">影音娱乐</text>
+      </g>
+      <g class="c-neutral">
+        <rect x="572" y="275" width="106" height="64" rx="8" />
+        <text class="th" x="625" y="303" text-anchor="middle">智能家电</text>
+        <text class="ts" x="625" y="322" text-anchor="middle">智能家电</text>
+      </g>
+
+      <!-- Protocol layer -->
+      <rect x="60" y="380" width="600" height="34" rx="6" fill="var(--surface-muted)" stroke="var(--border)" />
+      <text class="ts" x="360" y="402" text-anchor="middle">通信协议:  Wi-Fi  ·  Zigbee  ·  Bluetooth Mesh  ·  Thread  ·  Matter</text>
+
+      <!-- Connectors: External → Gateway -->
+      <path class="arr" d="M122 109 L122 135 L295 135 L295 155" marker-end="url(#arrow)" />
+      <text class="ts" x="200" y="137" text-anchor="middle">App控制</text>
+
+      <path class="arr" d="M302 109 L302 155" marker-end="url(#arrow)" />
+      <text class="ts" x="312" y="140" text-anchor="middle">语音指令</text>
+
+      <path class="arr" d="M482 109 L482 135 L425 135 L425 155" marker-end="url(#arrow)" />
+      <text class="ts" x="460" y="137" text-anchor="middle">云端同步</text>
+
+      <!-- Connectors: Gateway → Distribution → Devices -->
+      <path class="arr" d="M360 209 L360 238" marker-end="url(#arrowBrand)" />
+      <path class="arr" d="M105 238 L105 275" marker-end="url(#arrow)" />
+      <path class="arr" d="M105 238 L625 238" />
+      <path class="arr" d="M235 238 L235 275" marker-end="url(#arrow)" />
+      <path class="arr" d="M365 238 L365 275" marker-end="url(#arrow)" />
+      <path class="arr" d="M495 238 L495 275" marker-end="url(#arrow)" />
+      <path class="arr" d="M625 238 L625 275" marker-end="url(#arrow)" />
+
+      <!-- Connectors: Devices → Protocol -->
+      <path class="leader" d="M105 339 L105 376" />
+      <path class="leader" d="M235 339 L235 376" />
+      <path class="leader" d="M365 339 L365 376" />
+      <path class="leader" d="M495 339 L495 376" />
+      <path class="leader" d="M625 339 L625 376" />
+
+      <!-- Legend -->
+      <g transform="translate(160, 508)">
+        <rect x="0" y="2" width="16" height="16" rx="4" fill="var(--brand-soft)" stroke="var(--brand)" stroke-width="1.5" />
+        <text class="ts" x="22" y="15">核心中枢</text>
+      </g>
+      <g transform="translate(290, 508)">
+        <rect x="0" y="2" width="16" height="16" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5" />
+        <text class="ts" x="22" y="15">设备子系统</text>
+      </g>
+      <g transform="translate(420, 508)">
+        <rect x="0" y="2" width="16" height="16" rx="4" fill="var(--surface)" stroke="color-mix(in srgb, var(--text-muted) 42%, var(--border))" stroke-width="1.5" />
+        <text class="ts" x="22" y="15">外部入口</text>
+      </g>
+      <g transform="translate(540, 508)">
+        <line x1="0" y1="10" x2="24" y2="10" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="8 5" />
+        <text class="ts" x="30" y="15">系统边界</text>
+      </g>
+    </svg>
+  </div>
+</body>
+</html>
